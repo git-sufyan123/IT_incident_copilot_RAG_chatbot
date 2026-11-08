@@ -15,7 +15,7 @@ COLLECTION = "it_incident_tickets"
 
 
 def main():
-    df = pd.read_csv("data/raw/resolved_it_incidents_1000.csv")
+    df = pd.read_csv("data/resolved_it_incidents_1000.csv")
     chunks = [chunk_ticket(row) for row in df.to_dict("records")]
 
     if not qdrant.collection_exists(COLLECTION):
