@@ -52,7 +52,7 @@ def chunk_runbook(runbook):
 
 
 if __name__ == "__main__":
-    runbooks = load_runbooks("data/raw/runbooks.jsonl")
+    runbooks = load_runbooks("data/runbooks.jsonl")
 
     all_chunks = []
 
