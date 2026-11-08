@@ -19,7 +19,7 @@ def load_runbooks(file_path: str) -> list[dict]:
     return runbooks
 
 if __name__ == "__main__":
-    path = "data/raw/runbooks.jsonl"
+    path = "data/runbooks.jsonl"
 
     records = load_runbooks(path)
 
