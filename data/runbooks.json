@@ -1,0 +1,1017 @@
+[
+  {
+    "id": "RUN-NET-003",
+    "title": "VPN Authentication Failures",
+    "category": "Network",
+    "subcategory": "VPN",
+    "purpose": "Restore approved remote access while separating credential, MFA, client, and service-side failures.",
+    "symptoms": [
+      "Users or monitoring report an issue consistent with vpn authentication failures.",
+      "The issue may affect one user, a group, or a shared service; determine scope before acting."
+    ],
+    "prerequisites": [
+      "Confirm requester/service identity and business impact using approved process.",
+      "Identify environment, owner, first-failure time, and relevant recent changes.",
+      "Use authorized diagnostic tools and least-privilege access."
+    ],
+    "steps": [
+      "Record exact error, timestamp, client version, network type, and scope.",
+      "Check VPN and identity-provider service health and known changes.",
+      "Review approved sign-in logs for account status, MFA outcome, policy result, and correlation ID.",
+      "Check device time, supported client version, and captive portal/restricted-network conditions.",
+      "Perform one controlled retry after correcting an evidenced client-side issue; escalate gateway or identity-policy faults."
+    ],
+    "verification": [
+      "VPN connects and approved internal resources are reachable.",
+      "No repeated authentication failures remain."
+    ],
+    "rollback_recovery": [
+      "Revert only an identified approved change using the documented change record.",
+      "If rollback is unsafe or the cause is uncertain, stop and contact the service owner."
+    ],
+    "escalation": [
+      "Multiple users/sites affected; suspected certificate or identity-provider outage."
+    ],
+    "cautions": [
+      "Never disable MFA or collect passwords, recovery codes, or one-time codes."
+    ],
+    "related": [
+      "RUN-IAM-004",
+      "RUN-IAM-008",
+      "RUN-NET-007"
+    ],
+    "version": "1.0-synthetic",
+    "status": "Draft - requires environment-owner review",
+    "approval_required_for_changes": true,
+    "synthetic": true,
+    "document_text": "# RUN-NET-003: VPN Authentication Failures\n\nCategory: Network / VPN\n\nPurpose: Restore approved remote access while separating credential, MFA, client, and service-side failures.\n\nStatus: Draft synthetic material; review before operational use.\n\n## Symptoms\n- Users or monitoring report an issue consistent with vpn authentication failures.\n- The issue may affect one user, a group, or a shared service; determine scope before acting.\n\n## Prerequisites\n- Confirm requester/service identity and business impact using approved process.\n- Identify environment, owner, first-failure time, and relevant recent changes.\n- Use authorized diagnostic tools and least-privilege access.\n\n## Procedure\n1. Record exact error, timestamp, client version, network type, and scope.\n2. Check VPN and identity-provider service health and known changes.\n3. Review approved sign-in logs for account status, MFA outcome, policy result, and correlation ID.\n4. Check device time, supported client version, and captive portal/restricted-network conditions.\n5. Perform one controlled retry after correcting an evidenced client-side issue; escalate gateway or identity-policy faults.\n\n## Verification\n- VPN connects and approved internal resources are reachable.\n- No repeated authentication failures remain.\n\n## Rollback and recovery\n- Revert only an identified approved change using the documented change record.\n- If rollback is unsafe or the cause is uncertain, stop and contact the service owner.\n\n## Escalation\n- Multiple users/sites affected; suspected certificate or identity-provider outage.\n\n## Safety cautions\n- Never disable MFA or collect passwords, recovery codes, or one-time codes.\n\n## Related runbooks\n- RUN-IAM-004\n- RUN-IAM-008\n- RUN-NET-007\n\n## Evidence to record\n- Impact and scope\n- Start time and timezone\n- Sanitized errors and correlation IDs\n- Diagnostics and change IDs\n- Actions, approver, outcome, and follow-up owner"
+  },
+  {
+    "id": "RUN-NET-007",
+    "title": "Internal DNS Resolution Failures",
+    "category": "Network",
+    "subcategory": "DNS",
+    "purpose": "Diagnose name resolution without unapproved DNS changes.",
+    "symptoms": [
+      "Users or monitoring report an issue consistent with internal dns resolution failures.",
+      "The issue may affect one user, a group, or a shared service; determine scope before acting."
+    ],
+    "prerequisites": [
+      "Confirm requester/service identity and business impact using approved process.",
+      "Identify environment, owner, first-failure time, and relevant recent changes.",
+      "Use authorized diagnostic tools and least-privilege access."
+    ],
+    "steps": [
+      "Determine scope: hostname, device, subnet, VPN users, or broad outage.",
+      "Query the approved resolver and record response, TTL, and timestamp.",
+      "Compare with a known-good internal name and a second approved resolver if authorized.",
+      "Check client/VPN DNS settings, DNS service health, zone history, and resolver logs.",
+      "Change records only through approved change control and record the previous value."
+    ],
+    "verification": [
+      "Name resolves to the expected approved address.",
+      "Application works by hostname and resolver errors stop."
+    ],
+    "rollback_recovery": [
+      "Revert only an identified approved change using the documented change record.",
+      "If rollback is unsafe or the cause is uncertain, stop and contact the service owner."
+    ],
+    "escalation": [
+      "Core names fail broadly; suspected unauthorized DNS change; zone replication/DNSSEC issue."
+    ],
+    "cautions": [
+      "Do not publish internal DNS details or guess replacement IP addresses."
+    ],
+    "related": [
+      "RUN-NET-003",
+      "RUN-NET-011"
+    ],
+    "version": "1.0-synthetic",
+    "status": "Draft - requires environment-owner review",
+    "approval_required_for_changes": true,
+    "synthetic": true,
+    "document_text": "# RUN-NET-007: Internal DNS Resolution Failures\n\nCategory: Network / DNS\n\nPurpose: Diagnose name resolution without unapproved DNS changes.\n\nStatus: Draft synthetic material; review before operational use.\n\n## Symptoms\n- Users or monitoring report an issue consistent with internal dns resolution failures.\n- The issue may affect one user, a group, or a shared service; determine scope before acting.\n\n## Prerequisites\n- Confirm requester/service identity and business impact using approved process.\n- Identify environment, owner, first-failure time, and relevant recent changes.\n- Use authorized diagnostic tools and least-privilege access.\n\n## Procedure\n1. Determine scope: hostname, device, subnet, VPN users, or broad outage.\n2. Query the approved resolver and record response, TTL, and timestamp.\n3. Compare with a known-good internal name and a second approved resolver if authorized.\n4. Check client/VPN DNS settings, DNS service health, zone history, and resolver logs.\n5. Change records only through approved change control and record the previous value.\n\n## Verification\n- Name resolves to the expected approved address.\n- Application works by hostname and resolver errors stop.\n\n## Rollback and recovery\n- Revert only an identified approved change using the documented change record.\n- If rollback is unsafe or the cause is uncertain, stop and contact the service owner.\n\n## Escalation\n- Core names fail broadly; suspected unauthorized DNS change; zone replication/DNSSEC issue.\n\n## Safety cautions\n- Do not publish internal DNS details or guess replacement IP addresses.\n\n## Related runbooks\n- RUN-NET-003\n- RUN-NET-011\n\n## Evidence to record\n- Impact and scope\n- Start time and timezone\n- Sanitized errors and correlation IDs\n- Diagnostics and change IDs\n- Actions, approver, outcome, and follow-up owner"
+  },
+  {
+    "id": "RUN-NET-011",
+    "title": "Routing or Firewall Reachability",
+    "category": "Network",
+    "subcategory": "Connectivity",
+    "purpose": "Separate routing, filtering, endpoint, and listener causes.",
+    "symptoms": [
+      "Users or monitoring report an issue consistent with routing or firewall reachability.",
+      "The issue may affect one user, a group, or a shared service; determine scope before acting."
+    ],
+    "prerequisites": [
+      "Confirm requester/service identity and business impact using approved process.",
+      "Identify environment, owner, first-failure time, and relevant recent changes.",
+      "Use authorized diagnostic tools and least-privilege access."
+    ],
+    "steps": [
+      "Validate source, destination, port/protocol, owner, and expected path.",
+      "Run authorized connectivity checks and record timeout versus refusal.",
+      "Compare affected and unaffected network segments where possible.",
+      "Review route, firewall, ACL, and flow logs alongside recent change records.",
+      "Submit a narrowly scoped, owner-approved change with justification and expiry where appropriate."
+    ],
+    "verification": [
+      "Only the required path is reachable.",
+      "Monitoring and application checks pass without broader access."
+    ],
+    "rollback_recovery": [
+      "Revert only an identified approved change using the documented change record.",
+      "If rollback is unsafe or the cause is uncertain, stop and contact the service owner."
+    ],
+    "escalation": [
+      "Production-wide impact, unexpected broad access, route instability, or suspected boundary bypass."
+    ],
+    "cautions": [
+      "Never disable a firewall globally or create broad any-any rules."
+    ],
+    "related": [
+      "RUN-NET-007",
+      "RUN-APP-009"
+    ],
+    "version": "1.0-synthetic",
+    "status": "Draft - requires environment-owner review",
+    "approval_required_for_changes": true,
+    "synthetic": true,
+    "document_text": "# RUN-NET-011: Routing or Firewall Reachability\n\nCategory: Network / Connectivity\n\nPurpose: Separate routing, filtering, endpoint, and listener causes.\n\nStatus: Draft synthetic material; review before operational use.\n\n## Symptoms\n- Users or monitoring report an issue consistent with routing or firewall reachability.\n- The issue may affect one user, a group, or a shared service; determine scope before acting.\n\n## Prerequisites\n- Confirm requester/service identity and business impact using approved process.\n- Identify environment, owner, first-failure time, and relevant recent changes.\n- Use authorized diagnostic tools and least-privilege access.\n\n## Procedure\n1. Validate source, destination, port/protocol, owner, and expected path.\n2. Run authorized connectivity checks and record timeout versus refusal.\n3. Compare affected and unaffected network segments where possible.\n4. Review route, firewall, ACL, and flow logs alongside recent change records.\n5. Submit a narrowly scoped, owner-approved change with justification and expiry where appropriate.\n\n## Verification\n- Only the required path is reachable.\n- Monitoring and application checks pass without broader access.\n\n## Rollback and recovery\n- Revert only an identified approved change using the documented change record.\n- If rollback is unsafe or the cause is uncertain, stop and contact the service owner.\n\n## Escalation\n- Production-wide impact, unexpected broad access, route instability, or suspected boundary bypass.\n\n## Safety cautions\n- Never disable a firewall globally or create broad any-any rules.\n\n## Related runbooks\n- RUN-NET-007\n- RUN-APP-009\n\n## Evidence to record\n- Impact and scope\n- Start time and timezone\n- Sanitized errors and correlation IDs\n- Diagnostics and change IDs\n- Actions, approver, outcome, and follow-up owner"
+  },
+  {
+    "id": "RUN-IAM-004",
+    "title": "Repeated Account Lockouts",
+    "category": "Identity",
+    "subcategory": "Account lockout",
+    "purpose": "Find the source of repeated lockouts without weakening account protection.",
+    "symptoms": [
+      "Users or monitoring report an issue consistent with repeated account lockouts.",
+      "The issue may affect one user, a group, or a shared service; determine scope before acting."
+    ],
+    "prerequisites": [
+      "Confirm requester/service identity and business impact using approved process.",
+      "Identify environment, owner, first-failure time, and relevant recent changes.",
+      "Use authorized diagnostic tools and least-privilege access."
+    ],
+    "steps": [
+      "Verify identity through the approved support process.",
+      "Review identity audit logs for timestamps, source device/IP, application, and failure reason.",
+      "Determine whether attempts come from cached credentials, mobile clients, scheduled tasks, or interactive sign-ins.",
+      "Coordinate credential updates with service owners for dependent services.",
+      "Perform one controlled sign-in test and monitor for recurrence."
+    ],
+    "verification": [
+      "Account remains unlocked through the observation window.",
+      "The identified failure source stops and normal sign-in works."
+    ],
+    "rollback_recovery": [
+      "Revert only an identified approved change using the documented change record.",
+      "If rollback is unsafe or the cause is uncertain, stop and contact the service owner."
+    ],
+    "escalation": [
+      "Multiple accounts affected, unknown source, suspicious sign-ins, or privileged/service account involved."
+    ],
+    "cautions": [
+      "Do not lower lockout thresholds or request passwords."
+    ],
+    "related": [
+      "RUN-IAM-008",
+      "RUN-SEC-009"
+    ],
+    "version": "1.0-synthetic",
+    "status": "Draft - requires environment-owner review",
+    "approval_required_for_changes": true,
+    "synthetic": true,
+    "document_text": "# RUN-IAM-004: Repeated Account Lockouts\n\nCategory: Identity / Account lockout\n\nPurpose: Find the source of repeated lockouts without weakening account protection.\n\nStatus: Draft synthetic material; review before operational use.\n\n## Symptoms\n- Users or monitoring report an issue consistent with repeated account lockouts.\n- The issue may affect one user, a group, or a shared service; determine scope before acting.\n\n## Prerequisites\n- Confirm requester/service identity and business impact using approved process.\n- Identify environment, owner, first-failure time, and relevant recent changes.\n- Use authorized diagnostic tools and least-privilege access.\n\n## Procedure\n1. Verify identity through the approved support process.\n2. Review identity audit logs for timestamps, source device/IP, application, and failure reason.\n3. Determine whether attempts come from cached credentials, mobile clients, scheduled tasks, or interactive sign-ins.\n4. Coordinate credential updates with service owners for dependent services.\n5. Perform one controlled sign-in test and monitor for recurrence.\n\n## Verification\n- Account remains unlocked through the observation window.\n- The identified failure source stops and normal sign-in works.\n\n## Rollback and recovery\n- Revert only an identified approved change using the documented change record.\n- If rollback is unsafe or the cause is uncertain, stop and contact the service owner.\n\n## Escalation\n- Multiple accounts affected, unknown source, suspicious sign-ins, or privileged/service account involved.\n\n## Safety cautions\n- Do not lower lockout thresholds or request passwords.\n\n## Related runbooks\n- RUN-IAM-008\n- RUN-SEC-009\n\n## Evidence to record\n- Impact and scope\n- Start time and timezone\n- Sanitized errors and correlation IDs\n- Diagnostics and change IDs\n- Actions, approver, outcome, and follow-up owner"
+  },
+  {
+    "id": "RUN-IAM-008",
+    "title": "Repeated MFA Prompts",
+    "category": "Identity",
+    "subcategory": "MFA",
+    "purpose": "Resolve repeated MFA challenges while preserving strong authentication.",
+    "symptoms": [
+      "Users or monitoring report an issue consistent with repeated mfa prompts.",
+      "The issue may affect one user, a group, or a shared service; determine scope before acting."
+    ],
+    "prerequisites": [
+      "Confirm requester/service identity and business impact using approved process.",
+      "Identify environment, owner, first-failure time, and relevant recent changes.",
+      "Use authorized diagnostic tools and least-privilege access."
+    ],
+    "steps": [
+      "Ask whether prompts were initiated by the user; unsolicited prompts are a security signal.",
+      "Review sign-in logs for policy, device compliance, session expiry, and MFA results.",
+      "Check device clock, supported client, and approved browser/session settings.",
+      "Check identity service health and recent policy changes.",
+      "Use an approved fresh-session procedure only when appropriate; escalate unexplained prompts to security."
+    ],
+    "verification": [
+      "Expected session remains active and policy-compliant.",
+      "Unexplained prompts stop."
+    ],
+    "rollback_recovery": [
+      "Revert only an identified approved change using the documented change record.",
+      "If rollback is unsafe or the cause is uncertain, stop and contact the service owner."
+    ],
+    "escalation": [
+      "Unsolicited prompts, suspected compromise, or multiple users affected after a policy change."
+    ],
+    "cautions": [
+      "Never disable MFA or advise approving prompts the user did not initiate."
+    ],
+    "related": [
+      "RUN-IAM-004",
+      "RUN-SEC-009"
+    ],
+    "version": "1.0-synthetic",
+    "status": "Draft - requires environment-owner review",
+    "approval_required_for_changes": true,
+    "synthetic": true,
+    "document_text": "# RUN-IAM-008: Repeated MFA Prompts\n\nCategory: Identity / MFA\n\nPurpose: Resolve repeated MFA challenges while preserving strong authentication.\n\nStatus: Draft synthetic material; review before operational use.\n\n## Symptoms\n- Users or monitoring report an issue consistent with repeated mfa prompts.\n- The issue may affect one user, a group, or a shared service; determine scope before acting.\n\n## Prerequisites\n- Confirm requester/service identity and business impact using approved process.\n- Identify environment, owner, first-failure time, and relevant recent changes.\n- Use authorized diagnostic tools and least-privilege access.\n\n## Procedure\n1. Ask whether prompts were initiated by the user; unsolicited prompts are a security signal.\n2. Review sign-in logs for policy, device compliance, session expiry, and MFA results.\n3. Check device clock, supported client, and approved browser/session settings.\n4. Check identity service health and recent policy changes.\n5. Use an approved fresh-session procedure only when appropriate; escalate unexplained prompts to security.\n\n## Verification\n- Expected session remains active and policy-compliant.\n- Unexplained prompts stop.\n\n## Rollback and recovery\n- Revert only an identified approved change using the documented change record.\n- If rollback is unsafe or the cause is uncertain, stop and contact the service owner.\n\n## Escalation\n- Unsolicited prompts, suspected compromise, or multiple users affected after a policy change.\n\n## Safety cautions\n- Never disable MFA or advise approving prompts the user did not initiate.\n\n## Related runbooks\n- RUN-IAM-004\n- RUN-SEC-009\n\n## Evidence to record\n- Impact and scope\n- Start time and timezone\n- Sanitized errors and correlation IDs\n- Diagnostics and change IDs\n- Actions, approver, outcome, and follow-up owner"
+  },
+  {
+    "id": "RUN-END-005",
+    "title": "High CPU or Slow Endpoint Performance",
+    "category": "Endpoint",
+    "subcategory": "Performance",
+    "purpose": "Identify resource pressure and safe remediation on a managed workstation.",
+    "symptoms": [
+      "Users or monitoring report an issue consistent with high cpu or slow endpoint performance.",
+      "The issue may affect one user, a group, or a shared service; determine scope before acting."
+    ],
+    "prerequisites": [
+      "Confirm requester/service identity and business impact using approved process.",
+      "Identify environment, owner, first-failure time, and relevant recent changes.",
+      "Use authorized diagnostic tools and least-privilege access."
+    ],
+    "steps": [
+      "Record start time, affected apps, recent changes, and user impact.",
+      "Use approved monitoring to inspect CPU, memory, disk, and top processes.",
+      "Check security alerts, update activity, disk capacity, and system events.",
+      "Compare processes with the approved software inventory; do not terminate unknown agents.",
+      "Collect approved diagnostics and route persistent pressure to endpoint engineering."
+    ],
+    "verification": [
+      "Resource use returns to expected range and user workflow is responsive.",
+      "No security or management agent was disabled."
+    ],
+    "rollback_recovery": [
+      "Revert only an identified approved change using the documented change record.",
+      "If rollback is unsafe or the cause is uncertain, stop and contact the service owner."
+    ],
+    "escalation": [
+      "Repeated crashes, disk/memory errors, suspected malware, or fleet-wide impact."
+    ],
+    "cautions": [
+      "Do not disable EDR/antivirus or delete files/registry entries without approved procedure."
+    ],
+    "related": [
+      "RUN-PLT-004"
+    ],
+    "version": "1.0-synthetic",
+    "status": "Draft - requires environment-owner review",
+    "approval_required_for_changes": true,
+    "synthetic": true,
+    "document_text": "# RUN-END-005: High CPU or Slow Endpoint Performance\n\nCategory: Endpoint / Performance\n\nPurpose: Identify resource pressure and safe remediation on a managed workstation.\n\nStatus: Draft synthetic material; review before operational use.\n\n## Symptoms\n- Users or monitoring report an issue consistent with high cpu or slow endpoint performance.\n- The issue may affect one user, a group, or a shared service; determine scope before acting.\n\n## Prerequisites\n- Confirm requester/service identity and business impact using approved process.\n- Identify environment, owner, first-failure time, and relevant recent changes.\n- Use authorized diagnostic tools and least-privilege access.\n\n## Procedure\n1. Record start time, affected apps, recent changes, and user impact.\n2. Use approved monitoring to inspect CPU, memory, disk, and top processes.\n3. Check security alerts, update activity, disk capacity, and system events.\n4. Compare processes with the approved software inventory; do not terminate unknown agents.\n5. Collect approved diagnostics and route persistent pressure to endpoint engineering.\n\n## Verification\n- Resource use returns to expected range and user workflow is responsive.\n- No security or management agent was disabled.\n\n## Rollback and recovery\n- Revert only an identified approved change using the documented change record.\n- If rollback is unsafe or the cause is uncertain, stop and contact the service owner.\n\n## Escalation\n- Repeated crashes, disk/memory errors, suspected malware, or fleet-wide impact.\n\n## Safety cautions\n- Do not disable EDR/antivirus or delete files/registry entries without approved procedure.\n\n## Related runbooks\n- RUN-PLT-004\n\n## Evidence to record\n- Impact and scope\n- Start time and timezone\n- Sanitized errors and correlation IDs\n- Diagnostics and change IDs\n- Actions, approver, outcome, and follow-up owner"
+  },
+  {
+    "id": "RUN-END-014",
+    "title": "External Monitor or Dock Not Detected",
+    "category": "Endpoint",
+    "subcategory": "Display and dock",
+    "purpose": "Restore display/dock operation through low-risk checks.",
+    "symptoms": [
+      "Users or monitoring report an issue consistent with external monitor or dock not detected.",
+      "The issue may affect one user, a group, or a shared service; determine scope before acting."
+    ],
+    "prerequisites": [
+      "Confirm requester/service identity and business impact using approved process.",
+      "Identify environment, owner, first-failure time, and relevant recent changes.",
+      "Use authorized diagnostic tools and least-privilege access."
+    ],
+    "steps": [
+      "Check monitor power/input, cable seating, dock power, and supported port.",
+      "Test one variable at a time with known-good approved cable/port if available.",
+      "Review OS display settings and approved driver/firmware versions.",
+      "Check managed update history and compatibility notices.",
+      "Escalate hardware faults with inventory identifiers and test results."
+    ],
+    "verification": [
+      "Display works at expected resolution and peripherals stay connected.",
+      "No recurring disconnects appear."
+    ],
+    "rollback_recovery": [
+      "Revert only an identified approved change using the documented change record.",
+      "If rollback is unsafe or the cause is uncertain, stop and contact the service owner."
+    ],
+    "escalation": [
+      "Overheating, damaged connectors, repeated power faults, or fleet update impact."
+    ],
+    "cautions": [
+      "Do not open powered equipment or install drivers from untrusted sites."
+    ],
+    "related": [
+      "RUN-END-005"
+    ],
+    "version": "1.0-synthetic",
+    "status": "Draft - requires environment-owner review",
+    "approval_required_for_changes": true,
+    "synthetic": true,
+    "document_text": "# RUN-END-014: External Monitor or Dock Not Detected\n\nCategory: Endpoint / Display and dock\n\nPurpose: Restore display/dock operation through low-risk checks.\n\nStatus: Draft synthetic material; review before operational use.\n\n## Symptoms\n- Users or monitoring report an issue consistent with external monitor or dock not detected.\n- The issue may affect one user, a group, or a shared service; determine scope before acting.\n\n## Prerequisites\n- Confirm requester/service identity and business impact using approved process.\n- Identify environment, owner, first-failure time, and relevant recent changes.\n- Use authorized diagnostic tools and least-privilege access.\n\n## Procedure\n1. Check monitor power/input, cable seating, dock power, and supported port.\n2. Test one variable at a time with known-good approved cable/port if available.\n3. Review OS display settings and approved driver/firmware versions.\n4. Check managed update history and compatibility notices.\n5. Escalate hardware faults with inventory identifiers and test results.\n\n## Verification\n- Display works at expected resolution and peripherals stay connected.\n- No recurring disconnects appear.\n\n## Rollback and recovery\n- Revert only an identified approved change using the documented change record.\n- If rollback is unsafe or the cause is uncertain, stop and contact the service owner.\n\n## Escalation\n- Overheating, damaged connectors, repeated power faults, or fleet update impact.\n\n## Safety cautions\n- Do not open powered equipment or install drivers from untrusted sites.\n\n## Related runbooks\n- RUN-END-005\n\n## Evidence to record\n- Impact and scope\n- Start time and timezone\n- Sanitized errors and correlation IDs\n- Diagnostics and change IDs\n- Actions, approver, outcome, and follow-up owner"
+  },
+  {
+    "id": "RUN-MSG-003",
+    "title": "Outlook Authentication Prompts",
+    "category": "Messaging",
+    "subcategory": "Email client",
+    "purpose": "Diagnose recurring email-client authentication prompts.",
+    "symptoms": [
+      "Users or monitoring report an issue consistent with outlook authentication prompts.",
+      "The issue may affect one user, a group, or a shared service; determine scope before acting."
+    ],
+    "prerequisites": [
+      "Confirm requester/service identity and business impact using approved process.",
+      "Identify environment, owner, first-failure time, and relevant recent changes.",
+      "Use authorized diagnostic tools and least-privilege access."
+    ],
+    "steps": [
+      "Determine whether approved webmail works and capture exact error/time.",
+      "Review service health and identity sign-in logs.",
+      "Confirm client version, device compliance, account status, and license.",
+      "Correlate with password, policy, certificate, or client changes.",
+      "Use approved client repair/profile steps only after confirming mailbox data is server-synchronized."
+    ],
+    "verification": [
+      "Client authenticates and folders synchronize.",
+      "Test message sends and receives without repeated prompts."
+    ],
+    "rollback_recovery": [
+      "Revert only an identified approved change using the documented change record.",
+      "If rollback is unsafe or the cause is uncertain, stop and contact the service owner."
+    ],
+    "escalation": [
+      "Service outage, apparent missing data, multiple users affected, or compromise indicators."
+    ],
+    "cautions": [
+      "Never request tokens/passwords or delete local data before verifying synchronization."
+    ],
+    "related": [
+      "RUN-IAM-008",
+      "RUN-MSG-006"
+    ],
+    "version": "1.0-synthetic",
+    "status": "Draft - requires environment-owner review",
+    "approval_required_for_changes": true,
+    "synthetic": true,
+    "document_text": "# RUN-MSG-003: Outlook Authentication Prompts\n\nCategory: Messaging / Email client\n\nPurpose: Diagnose recurring email-client authentication prompts.\n\nStatus: Draft synthetic material; review before operational use.\n\n## Symptoms\n- Users or monitoring report an issue consistent with outlook authentication prompts.\n- The issue may affect one user, a group, or a shared service; determine scope before acting.\n\n## Prerequisites\n- Confirm requester/service identity and business impact using approved process.\n- Identify environment, owner, first-failure time, and relevant recent changes.\n- Use authorized diagnostic tools and least-privilege access.\n\n## Procedure\n1. Determine whether approved webmail works and capture exact error/time.\n2. Review service health and identity sign-in logs.\n3. Confirm client version, device compliance, account status, and license.\n4. Correlate with password, policy, certificate, or client changes.\n5. Use approved client repair/profile steps only after confirming mailbox data is server-synchronized.\n\n## Verification\n- Client authenticates and folders synchronize.\n- Test message sends and receives without repeated prompts.\n\n## Rollback and recovery\n- Revert only an identified approved change using the documented change record.\n- If rollback is unsafe or the cause is uncertain, stop and contact the service owner.\n\n## Escalation\n- Service outage, apparent missing data, multiple users affected, or compromise indicators.\n\n## Safety cautions\n- Never request tokens/passwords or delete local data before verifying synchronization.\n\n## Related runbooks\n- RUN-IAM-008\n- RUN-MSG-006\n\n## Evidence to record\n- Impact and scope\n- Start time and timezone\n- Sanitized errors and correlation IDs\n- Diagnostics and change IDs\n- Actions, approver, outcome, and follow-up owner"
+  },
+  {
+    "id": "RUN-APP-004",
+    "title": "HTTP 500 Application Errors",
+    "category": "Application",
+    "subcategory": "HTTP 500",
+    "purpose": "Triage server-side errors and identify failing dependencies.",
+    "symptoms": [
+      "Users or monitoring report an issue consistent with http 500 application errors.",
+      "The issue may affect one user, a group, or a shared service; determine scope before acting."
+    ],
+    "prerequisites": [
+      "Confirm requester/service identity and business impact using approved process.",
+      "Identify environment, owner, first-failure time, and relevant recent changes.",
+      "Use authorized diagnostic tools and least-privilege access."
+    ],
+    "steps": [
+      "Capture sanitized error, request ID, timestamp, endpoint, and scope.",
+      "Check error-rate dashboards, resource saturation, and dependency health.",
+      "Correlate onset with deployments, feature flags, configuration rotations, and infrastructure changes.",
+      "Inspect authorized logs/traces using request IDs; redact secrets and personal data.",
+      "If a recent change is implicated, follow approved rollback/feature-flag process and document findings."
+    ],
+    "verification": [
+      "Error rate returns to baseline and key user journeys pass.",
+      "No continuing exception pattern is visible."
+    ],
+    "rollback_recovery": [
+      "Revert only an identified approved change using the documented change record.",
+      "If rollback is unsafe or the cause is uncertain, stop and contact the service owner."
+    ],
+    "escalation": [
+      "Critical outage, data integrity/security risk, no safe rollback, or errors persist after rollback."
+    ],
+    "cautions": [
+      "Do not expose stack traces/secrets to users or edit production data as a shortcut."
+    ],
+    "related": [
+      "RUN-APP-009",
+      "RUN-APP-014",
+      "RUN-DB-003"
+    ],
+    "version": "1.0-synthetic",
+    "status": "Draft - requires environment-owner review",
+    "approval_required_for_changes": true,
+    "synthetic": true,
+    "document_text": "# RUN-APP-004: HTTP 500 Application Errors\n\nCategory: Application / HTTP 500\n\nPurpose: Triage server-side errors and identify failing dependencies.\n\nStatus: Draft synthetic material; review before operational use.\n\n## Symptoms\n- Users or monitoring report an issue consistent with http 500 application errors.\n- The issue may affect one user, a group, or a shared service; determine scope before acting.\n\n## Prerequisites\n- Confirm requester/service identity and business impact using approved process.\n- Identify environment, owner, first-failure time, and relevant recent changes.\n- Use authorized diagnostic tools and least-privilege access.\n\n## Procedure\n1. Capture sanitized error, request ID, timestamp, endpoint, and scope.\n2. Check error-rate dashboards, resource saturation, and dependency health.\n3. Correlate onset with deployments, feature flags, configuration rotations, and infrastructure changes.\n4. Inspect authorized logs/traces using request IDs; redact secrets and personal data.\n5. If a recent change is implicated, follow approved rollback/feature-flag process and document findings.\n\n## Verification\n- Error rate returns to baseline and key user journeys pass.\n- No continuing exception pattern is visible.\n\n## Rollback and recovery\n- Revert only an identified approved change using the documented change record.\n- If rollback is unsafe or the cause is uncertain, stop and contact the service owner.\n\n## Escalation\n- Critical outage, data integrity/security risk, no safe rollback, or errors persist after rollback.\n\n## Safety cautions\n- Do not expose stack traces/secrets to users or edit production data as a shortcut.\n\n## Related runbooks\n- RUN-APP-009\n- RUN-APP-014\n- RUN-DB-003\n\n## Evidence to record\n- Impact and scope\n- Start time and timezone\n- Sanitized errors and correlation IDs\n- Diagnostics and change IDs\n- Actions, approver, outcome, and follow-up owner"
+  },
+  {
+    "id": "RUN-APP-009",
+    "title": "HTTP 502 or 503 Gateway Errors",
+    "category": "Application",
+    "subcategory": "HTTP 502/503",
+    "purpose": "Determine whether gateway errors come from upstream health, routing, or capacity.",
+    "symptoms": [
+      "Users or monitoring report an issue consistent with http 502 or 503 gateway errors.",
+      "The issue may affect one user, a group, or a shared service; determine scope before acting."
+    ],
+    "prerequisites": [
+      "Confirm requester/service identity and business impact using approved process.",
+      "Identify environment, owner, first-failure time, and relevant recent changes.",
+      "Use authorized diagnostic tools and least-privilege access."
+    ],
+    "steps": [
+      "Check service health, synthetic checks, and change announcements.",
+      "Compare gateway errors with upstream health and request IDs.",
+      "Review target health, readiness, connection pools, capacity, and routing changes.",
+      "Check dependency outages and saturation before altering gateway settings.",
+      "Apply approved rollback or documented capacity mitigation and set a review time."
+    ],
+    "verification": [
+      "Gateway responses and upstream health recover.",
+      "Latency/error rate return to service objectives."
+    ],
+    "rollback_recovery": [
+      "Revert only an identified approved change using the documented change record.",
+      "If rollback is unsafe or the cause is uncertain, stop and contact the service owner."
+    ],
+    "escalation": [
+      "No healthy upstream, multi-region outage, cascading failure, or data risk."
+    ],
+    "cautions": [
+      "Avoid blind retry increases and never bypass gateway authorization."
+    ],
+    "related": [
+      "RUN-APP-004",
+      "RUN-APP-014",
+      "RUN-PLT-004"
+    ],
+    "version": "1.0-synthetic",
+    "status": "Draft - requires environment-owner review",
+    "approval_required_for_changes": true,
+    "synthetic": true,
+    "document_text": "# RUN-APP-009: HTTP 502 or 503 Gateway Errors\n\nCategory: Application / HTTP 502/503\n\nPurpose: Determine whether gateway errors come from upstream health, routing, or capacity.\n\nStatus: Draft synthetic material; review before operational use.\n\n## Symptoms\n- Users or monitoring report an issue consistent with http 502 or 503 gateway errors.\n- The issue may affect one user, a group, or a shared service; determine scope before acting.\n\n## Prerequisites\n- Confirm requester/service identity and business impact using approved process.\n- Identify environment, owner, first-failure time, and relevant recent changes.\n- Use authorized diagnostic tools and least-privilege access.\n\n## Procedure\n1. Check service health, synthetic checks, and change announcements.\n2. Compare gateway errors with upstream health and request IDs.\n3. Review target health, readiness, connection pools, capacity, and routing changes.\n4. Check dependency outages and saturation before altering gateway settings.\n5. Apply approved rollback or documented capacity mitigation and set a review time.\n\n## Verification\n- Gateway responses and upstream health recover.\n- Latency/error rate return to service objectives.\n\n## Rollback and recovery\n- Revert only an identified approved change using the documented change record.\n- If rollback is unsafe or the cause is uncertain, stop and contact the service owner.\n\n## Escalation\n- No healthy upstream, multi-region outage, cascading failure, or data risk.\n\n## Safety cautions\n- Avoid blind retry increases and never bypass gateway authorization.\n\n## Related runbooks\n- RUN-APP-004\n- RUN-APP-014\n- RUN-PLT-004\n\n## Evidence to record\n- Impact and scope\n- Start time and timezone\n- Sanitized errors and correlation IDs\n- Diagnostics and change IDs\n- Actions, approver, outcome, and follow-up owner"
+  },
+  {
+    "id": "RUN-DB-003",
+    "title": "Application Database Connection Timeouts",
+    "category": "Database",
+    "subcategory": "Connectivity and timeout",
+    "purpose": "Diagnose DB connectivity and saturation while protecting data integrity.",
+    "symptoms": [
+      "Users or monitoring report an issue consistent with application database connection timeouts.",
+      "The issue may affect one user, a group, or a shared service; determine scope before acting."
+    ],
+    "prerequisites": [
+      "Confirm requester/service identity and business impact using approved process.",
+      "Identify environment, owner, first-failure time, and relevant recent changes.",
+      "Use authorized diagnostic tools and least-privilege access."
+    ],
+    "steps": [
+      "Check database health, connection count, CPU, storage, and latency.",
+      "Correlate app errors with database and network telemetry.",
+      "Inspect pool saturation, long-running queries, and recent releases using approved read-only tools.",
+      "Verify secret/certificate rotation metadata without printing values.",
+      "Require DBA authorization for query cancellation, failover, restart, or parameter changes."
+    ],
+    "verification": [
+      "Connection errors return to baseline and representative transactions succeed.",
+      "Database and replication indicators remain healthy."
+    ],
+    "rollback_recovery": [
+      "Revert only an identified approved change using the documented change record.",
+      "If rollback is unsafe or the cause is uncertain, stop and contact the service owner."
+    ],
+    "escalation": [
+      "Corruption risk, exhausted storage, replication lag, broad outage, or potential lost/duplicated transactions."
+    ],
+    "cautions": [
+      "Never run unreviewed writes, reset production DBs, or paste credentials/connection strings."
+    ],
+    "related": [
+      "RUN-APP-004",
+      "RUN-APP-014",
+      "RUN-DB-007"
+    ],
+    "version": "1.0-synthetic",
+    "status": "Draft - requires environment-owner review",
+    "approval_required_for_changes": true,
+    "synthetic": true,
+    "document_text": "# RUN-DB-003: Application Database Connection Timeouts\n\nCategory: Database / Connectivity and timeout\n\nPurpose: Diagnose DB connectivity and saturation while protecting data integrity.\n\nStatus: Draft synthetic material; review before operational use.\n\n## Symptoms\n- Users or monitoring report an issue consistent with application database connection timeouts.\n- The issue may affect one user, a group, or a shared service; determine scope before acting.\n\n## Prerequisites\n- Confirm requester/service identity and business impact using approved process.\n- Identify environment, owner, first-failure time, and relevant recent changes.\n- Use authorized diagnostic tools and least-privilege access.\n\n## Procedure\n1. Check database health, connection count, CPU, storage, and latency.\n2. Correlate app errors with database and network telemetry.\n3. Inspect pool saturation, long-running queries, and recent releases using approved read-only tools.\n4. Verify secret/certificate rotation metadata without printing values.\n5. Require DBA authorization for query cancellation, failover, restart, or parameter changes.\n\n## Verification\n- Connection errors return to baseline and representative transactions succeed.\n- Database and replication indicators remain healthy.\n\n## Rollback and recovery\n- Revert only an identified approved change using the documented change record.\n- If rollback is unsafe or the cause is uncertain, stop and contact the service owner.\n\n## Escalation\n- Corruption risk, exhausted storage, replication lag, broad outage, or potential lost/duplicated transactions.\n\n## Safety cautions\n- Never run unreviewed writes, reset production DBs, or paste credentials/connection strings.\n\n## Related runbooks\n- RUN-APP-004\n- RUN-APP-014\n- RUN-DB-007\n\n## Evidence to record\n- Impact and scope\n- Start time and timezone\n- Sanitized errors and correlation IDs\n- Diagnostics and change IDs\n- Actions, approver, outcome, and follow-up owner"
+  },
+  {
+    "id": "RUN-SEC-005",
+    "title": "Suspected Phishing Email",
+    "category": "Security",
+    "subcategory": "Phishing",
+    "purpose": "Contain and investigate suspicious email through approved response processes.",
+    "symptoms": [
+      "Users or monitoring report an issue consistent with suspected phishing email.",
+      "The issue may affect one user, a group, or a shared service; determine scope before acting."
+    ],
+    "prerequisites": [
+      "Confirm requester/service identity and business impact using approved process.",
+      "Identify environment, owner, first-failure time, and relevant recent changes.",
+      "Use authorized diagnostic tools and least-privilege access."
+    ],
+    "steps": [
+      "Tell reporter not to click, open, reply, or forward outside approved reporting tooling.",
+      "Preserve original message and headers using the approved security workflow.",
+      "Security staff review sender authentication, links, attachment verdicts, and distribution.",
+      "Ask whether links were clicked, files opened, credentials submitted, or prompts approved.",
+      "Follow incident response for session revocation, credential reset, endpoint checks, and message containment as appropriate."
+    ],
+    "verification": [
+      "Message is dispositioned and affected users receive approved guidance.",
+      "Possible exposure is contained and monitored."
+    ],
+    "rollback_recovery": [
+      "Revert only an identified approved change using the documented change record.",
+      "If rollback is unsafe or the cause is uncertain, stop and contact the service owner."
+    ],
+    "escalation": [
+      "Credentials submitted, malware executed, payment fraud, privileged target, or broad distribution."
+    ],
+    "cautions": [
+      "Do not test links on a normal workstation or share malicious files publicly."
+    ],
+    "related": [
+      "RUN-SEC-009",
+      "RUN-IAM-008"
+    ],
+    "version": "1.0-synthetic",
+    "status": "Draft - requires environment-owner review",
+    "approval_required_for_changes": true,
+    "synthetic": true,
+    "document_text": "# RUN-SEC-005: Suspected Phishing Email\n\nCategory: Security / Phishing\n\nPurpose: Contain and investigate suspicious email through approved response processes.\n\nStatus: Draft synthetic material; review before operational use.\n\n## Symptoms\n- Users or monitoring report an issue consistent with suspected phishing email.\n- The issue may affect one user, a group, or a shared service; determine scope before acting.\n\n## Prerequisites\n- Confirm requester/service identity and business impact using approved process.\n- Identify environment, owner, first-failure time, and relevant recent changes.\n- Use authorized diagnostic tools and least-privilege access.\n\n## Procedure\n1. Tell reporter not to click, open, reply, or forward outside approved reporting tooling.\n2. Preserve original message and headers using the approved security workflow.\n3. Security staff review sender authentication, links, attachment verdicts, and distribution.\n4. Ask whether links were clicked, files opened, credentials submitted, or prompts approved.\n5. Follow incident response for session revocation, credential reset, endpoint checks, and message containment as appropriate.\n\n## Verification\n- Message is dispositioned and affected users receive approved guidance.\n- Possible exposure is contained and monitored.\n\n## Rollback and recovery\n- Revert only an identified approved change using the documented change record.\n- If rollback is unsafe or the cause is uncertain, stop and contact the service owner.\n\n## Escalation\n- Credentials submitted, malware executed, payment fraud, privileged target, or broad distribution.\n\n## Safety cautions\n- Do not test links on a normal workstation or share malicious files publicly.\n\n## Related runbooks\n- RUN-SEC-009\n- RUN-IAM-008\n\n## Evidence to record\n- Impact and scope\n- Start time and timezone\n- Sanitized errors and correlation IDs\n- Diagnostics and change IDs\n- Actions, approver, outcome, and follow-up owner"
+  },
+  {
+    "id": "RUN-PLT-004",
+    "title": "Container Restarts and Memory Pressure",
+    "category": "Platform",
+    "subcategory": "Containers",
+    "purpose": "Triage restarts and memory pressure using observability and safe controls.",
+    "symptoms": [
+      "Users or monitoring report an issue consistent with container restarts and memory pressure.",
+      "The issue may affect one user, a group, or a shared service; determine scope before acting."
+    ],
+    "prerequisites": [
+      "Confirm requester/service identity and business impact using approved process.",
+      "Identify environment, owner, first-failure time, and relevant recent changes.",
+      "Use authorized diagnostic tools and least-privilege access."
+    ],
+    "steps": [
+      "Review events, restart counts, exit reasons, memory/CPU metrics, and deployment history.",
+      "Compare memory usage to requests/limits and assess traffic/input changes.",
+      "Inspect sanitized logs and check node pressure and neighboring workloads.",
+      "If a release is implicated, use approved rollback or documented resource adjustment.",
+      "Validate probes against realistic startup behavior; monitor workload and node health."
+    ],
+    "verification": [
+      "Restart rate stabilizes and workload serves test requests.",
+      "Cluster/namespace capacity remains within policy."
+    ],
+    "rollback_recovery": [
+      "Revert only an identified approved change using the documented change record.",
+      "If rollback is unsafe or the cause is uncertain, stop and contact the service owner."
+    ],
+    "escalation": [
+      "Cluster-wide pressure, critical workload instability, or no safe capacity."
+    ],
+    "cautions": [
+      "Do not delete persistent volumes, restart all workloads indiscriminately, or expose cluster secrets."
+    ],
+    "related": [
+      "RUN-APP-009",
+      "RUN-CLD-009"
+    ],
+    "version": "1.0-synthetic",
+    "status": "Draft - requires environment-owner review",
+    "approval_required_for_changes": true,
+    "synthetic": true,
+    "document_text": "# RUN-PLT-004: Container Restarts and Memory Pressure\n\nCategory: Platform / Containers\n\nPurpose: Triage restarts and memory pressure using observability and safe controls.\n\nStatus: Draft synthetic material; review before operational use.\n\n## Symptoms\n- Users or monitoring report an issue consistent with container restarts and memory pressure.\n- The issue may affect one user, a group, or a shared service; determine scope before acting.\n\n## Prerequisites\n- Confirm requester/service identity and business impact using approved process.\n- Identify environment, owner, first-failure time, and relevant recent changes.\n- Use authorized diagnostic tools and least-privilege access.\n\n## Procedure\n1. Review events, restart counts, exit reasons, memory/CPU metrics, and deployment history.\n2. Compare memory usage to requests/limits and assess traffic/input changes.\n3. Inspect sanitized logs and check node pressure and neighboring workloads.\n4. If a release is implicated, use approved rollback or documented resource adjustment.\n5. Validate probes against realistic startup behavior; monitor workload and node health.\n\n## Verification\n- Restart rate stabilizes and workload serves test requests.\n- Cluster/namespace capacity remains within policy.\n\n## Rollback and recovery\n- Revert only an identified approved change using the documented change record.\n- If rollback is unsafe or the cause is uncertain, stop and contact the service owner.\n\n## Escalation\n- Cluster-wide pressure, critical workload instability, or no safe capacity.\n\n## Safety cautions\n- Do not delete persistent volumes, restart all workloads indiscriminately, or expose cluster secrets.\n\n## Related runbooks\n- RUN-APP-009\n- RUN-CLD-009\n\n## Evidence to record\n- Impact and scope\n- Start time and timezone\n- Sanitized errors and correlation IDs\n- Diagnostics and change IDs\n- Actions, approver, outcome, and follow-up owner"
+  },
+  {
+    "id": "RUN-BKP-006",
+    "title": "Slow or Failed Backup Jobs",
+    "category": "Backup and Recovery",
+    "subcategory": "Backup",
+    "purpose": "Investigate backup failure while preserving known-good recovery points.",
+    "symptoms": [
+      "Users or monitoring report an issue consistent with slow or failed backup jobs.",
+      "The issue may affect one user, a group, or a shared service; determine scope before acting."
+    ],
+    "prerequisites": [
+      "Confirm requester/service identity and business impact using approved process.",
+      "Identify environment, owner, first-failure time, and relevant recent changes.",
+      "Use authorized diagnostic tools and least-privilege access."
+    ],
+    "steps": [
+      "Check job status, error, duration, asset health, repository capacity, and recent changes.",
+      "Determine whether failures share proxy, storage, network, or credential dependencies.",
+      "Review throughput, snapshot/provider health, repository state, and maintenance notices.",
+      "Verify credential status via metadata only.",
+      "Retry only if policy allows and cause is understood; notify asset owner of missed recovery points."
+    ],
+    "verification": [
+      "Successful backup is recorded and repository/retention remain compliant.",
+      "Restore-test evidence meets policy."
+    ],
+    "rollback_recovery": [
+      "Revert only an identified approved change using the documented change record.",
+      "If rollback is unsafe or the cause is uncertain, stop and contact the service owner."
+    ],
+    "escalation": [
+      "Critical asset has no valid recovery point, multiple failures, retention risk, or suspected ransomware."
+    ],
+    "cautions": [
+      "Do not delete recovery points to free space without retention-owner approval; a green job is not proof of restoreability."
+    ],
+    "related": [
+      "RUN-DB-007",
+      "RUN-SEC-005"
+    ],
+    "version": "1.0-synthetic",
+    "status": "Draft - requires environment-owner review",
+    "approval_required_for_changes": true,
+    "synthetic": true,
+    "document_text": "# RUN-BKP-006: Slow or Failed Backup Jobs\n\nCategory: Backup and Recovery / Backup\n\nPurpose: Investigate backup failure while preserving known-good recovery points.\n\nStatus: Draft synthetic material; review before operational use.\n\n## Symptoms\n- Users or monitoring report an issue consistent with slow or failed backup jobs.\n- The issue may affect one user, a group, or a shared service; determine scope before acting.\n\n## Prerequisites\n- Confirm requester/service identity and business impact using approved process.\n- Identify environment, owner, first-failure time, and relevant recent changes.\n- Use authorized diagnostic tools and least-privilege access.\n\n## Procedure\n1. Check job status, error, duration, asset health, repository capacity, and recent changes.\n2. Determine whether failures share proxy, storage, network, or credential dependencies.\n3. Review throughput, snapshot/provider health, repository state, and maintenance notices.\n4. Verify credential status via metadata only.\n5. Retry only if policy allows and cause is understood; notify asset owner of missed recovery points.\n\n## Verification\n- Successful backup is recorded and repository/retention remain compliant.\n- Restore-test evidence meets policy.\n\n## Rollback and recovery\n- Revert only an identified approved change using the documented change record.\n- If rollback is unsafe or the cause is uncertain, stop and contact the service owner.\n\n## Escalation\n- Critical asset has no valid recovery point, multiple failures, retention risk, or suspected ransomware.\n\n## Safety cautions\n- Do not delete recovery points to free space without retention-owner approval; a green job is not proof of restoreability.\n\n## Related runbooks\n- RUN-DB-007\n- RUN-SEC-005\n\n## Evidence to record\n- Impact and scope\n- Start time and timezone\n- Sanitized errors and correlation IDs\n- Diagnostics and change IDs\n- Actions, approver, outcome, and follow-up owner"
+  },
+  {
+    "id": "RUN-STO-003",
+    "title": "Network File Share Access",
+    "category": "Storage",
+    "subcategory": "File share",
+    "purpose": "Resolve share access/availability while maintaining least privilege.",
+    "symptoms": [
+      "Users or monitoring report an issue consistent with network file share access.",
+      "The issue may affect one user, a group, or a shared service; determine scope before acting."
+    ],
+    "prerequisites": [
+      "Confirm requester/service identity and business impact using approved process.",
+      "Identify environment, owner, first-failure time, and relevant recent changes.",
+      "Use authorized diagnostic tools and least-privilege access."
+    ],
+    "steps": [
+      "Determine whether issue is DNS, connectivity, authentication, authorization, or server health.",
+      "Check whether other authorized users can access the same path.",
+      "Review effective permissions and group membership with approved tools.",
+      "Check recent ACL, group, capacity, and server changes with resource owner.",
+      "Request the smallest approved entitlement change and verify access."
+    ],
+    "verification": [
+      "User accesses only the intended files and share.",
+      "Permissions match approved group membership."
+    ],
+    "rollback_recovery": [
+      "Revert only an identified approved change using the documented change record.",
+      "If rollback is unsafe or the cause is uncertain, stop and contact the service owner."
+    ],
+    "escalation": [
+      "Sensitive-data exposure, suspected unauthorized access, corruption, or widespread outage."
+    ],
+    "cautions": [
+      "Never grant Everyone-like access or copy sensitive files to personal storage."
+    ],
+    "related": [
+      "RUN-IAM-015",
+      "RUN-NET-007"
+    ],
+    "version": "1.0-synthetic",
+    "status": "Draft - requires environment-owner review",
+    "approval_required_for_changes": true,
+    "synthetic": true,
+    "document_text": "# RUN-STO-003: Network File Share Access\n\nCategory: Storage / File share\n\nPurpose: Resolve share access/availability while maintaining least privilege.\n\nStatus: Draft synthetic material; review before operational use.\n\n## Symptoms\n- Users or monitoring report an issue consistent with network file share access.\n- The issue may affect one user, a group, or a shared service; determine scope before acting.\n\n## Prerequisites\n- Confirm requester/service identity and business impact using approved process.\n- Identify environment, owner, first-failure time, and relevant recent changes.\n- Use authorized diagnostic tools and least-privilege access.\n\n## Procedure\n1. Determine whether issue is DNS, connectivity, authentication, authorization, or server health.\n2. Check whether other authorized users can access the same path.\n3. Review effective permissions and group membership with approved tools.\n4. Check recent ACL, group, capacity, and server changes with resource owner.\n5. Request the smallest approved entitlement change and verify access.\n\n## Verification\n- User accesses only the intended files and share.\n- Permissions match approved group membership.\n\n## Rollback and recovery\n- Revert only an identified approved change using the documented change record.\n- If rollback is unsafe or the cause is uncertain, stop and contact the service owner.\n\n## Escalation\n- Sensitive-data exposure, suspected unauthorized access, corruption, or widespread outage.\n\n## Safety cautions\n- Never grant Everyone-like access or copy sensitive files to personal storage.\n\n## Related runbooks\n- RUN-IAM-015\n- RUN-NET-007\n\n## Evidence to record\n- Impact and scope\n- Start time and timezone\n- Sanitized errors and correlation IDs\n- Diagnostics and change IDs\n- Actions, approver, outcome, and follow-up owner"
+  },
+  {
+    "id": "RUN-WKS-002",
+    "title": "Printer Offline or Queue Failures",
+    "category": "Workplace Technology",
+    "subcategory": "Printing",
+    "purpose": "Restore managed printing with low-risk checks and controlled queue administration.",
+    "symptoms": [
+      "Users or monitoring report an issue consistent with printer offline or queue failures.",
+      "The issue may affect one user, a group, or a shared service; determine scope before acting."
+    ],
+    "prerequisites": [
+      "Confirm requester/service identity and business impact using approved process.",
+      "Identify environment, owner, first-failure time, and relevant recent changes.",
+      "Use authorized diagnostic tools and least-privilege access."
+    ],
+    "steps": [
+      "Determine scope across users and a test workstation.",
+      "Check power, printer status, network, consumables, and service notices.",
+      "Verify managed queue and supported driver.",
+      "Review queue/server logs for stuck jobs, driver faults, and connectivity.",
+      "Cancel only confirmed affected jobs; shared-queue clearing requires owner approval."
+    ],
+    "verification": [
+      "Harmless test page prints and queue returns to normal.",
+      "Sensitive output is collected or disposed of securely."
+    ],
+    "rollback_recovery": [
+      "Revert only an identified approved change using the documented change record.",
+      "If rollback is unsafe or the cause is uncertain, stop and contact the service owner."
+    ],
+    "escalation": [
+      "Multiple departments affected, hardware fault, or confidential print exposure."
+    ],
+    "cautions": [
+      "Do not use confidential documents as tests or restart shared services without approval."
+    ],
+    "related": [
+      "RUN-NET-011"
+    ],
+    "version": "1.0-synthetic",
+    "status": "Draft - requires environment-owner review",
+    "approval_required_for_changes": true,
+    "synthetic": true,
+    "document_text": "# RUN-WKS-002: Printer Offline or Queue Failures\n\nCategory: Workplace Technology / Printing\n\nPurpose: Restore managed printing with low-risk checks and controlled queue administration.\n\nStatus: Draft synthetic material; review before operational use.\n\n## Symptoms\n- Users or monitoring report an issue consistent with printer offline or queue failures.\n- The issue may affect one user, a group, or a shared service; determine scope before acting.\n\n## Prerequisites\n- Confirm requester/service identity and business impact using approved process.\n- Identify environment, owner, first-failure time, and relevant recent changes.\n- Use authorized diagnostic tools and least-privilege access.\n\n## Procedure\n1. Determine scope across users and a test workstation.\n2. Check power, printer status, network, consumables, and service notices.\n3. Verify managed queue and supported driver.\n4. Review queue/server logs for stuck jobs, driver faults, and connectivity.\n5. Cancel only confirmed affected jobs; shared-queue clearing requires owner approval.\n\n## Verification\n- Harmless test page prints and queue returns to normal.\n- Sensitive output is collected or disposed of securely.\n\n## Rollback and recovery\n- Revert only an identified approved change using the documented change record.\n- If rollback is unsafe or the cause is uncertain, stop and contact the service owner.\n\n## Escalation\n- Multiple departments affected, hardware fault, or confidential print exposure.\n\n## Safety cautions\n- Do not use confidential documents as tests or restart shared services without approval.\n\n## Related runbooks\n- RUN-NET-011\n\n## Evidence to record\n- Impact and scope\n- Start time and timezone\n- Sanitized errors and correlation IDs\n- Diagnostics and change IDs\n- Actions, approver, outcome, and follow-up owner"
+  },
+  {
+    "id": "RUN-IAM-015",
+    "title": "Missing Application Access",
+    "category": "Identity",
+    "subcategory": "Authorization",
+    "purpose": "Resolve application access through entitlement, licensing, and approval checks.",
+    "symptoms": [
+      "Users or monitoring report an issue consistent with missing application access.",
+      "The issue may affect one user, a group, or a shared service; determine scope before acting."
+    ],
+    "prerequisites": [
+      "Confirm requester/service identity and business impact using approved process.",
+      "Identify environment, owner, first-failure time, and relevant recent changes.",
+      "Use authorized diagnostic tools and least-privilege access."
+    ],
+    "steps": [
+      "Distinguish authentication failure from authorization failure.",
+      "Check application assignment, license, group membership, role mapping, and provisioning state.",
+      "Confirm the requested role is approved for the job function and data scope.",
+      "Check recent governance or app configuration changes.",
+      "Apply minimum approved entitlement through the source-of-truth access process."
+    ],
+    "verification": [
+      "Required function works and effective permissions match approval.",
+      "Access grant is auditable."
+    ],
+    "rollback_recovery": [
+      "Revert only an identified approved change using the documented change record.",
+      "If rollback is unsafe or the cause is uncertain, stop and contact the service owner."
+    ],
+    "escalation": [
+      "Unapproved privileged request, sensitive-data exposure risk, or broad provisioning failure."
+    ],
+    "cautions": [
+      "Do not grant administrator rights or bypass approval/separation-of-duties controls."
+    ],
+    "related": [
+      "RUN-IAM-004",
+      "RUN-STO-003"
+    ],
+    "version": "1.0-synthetic",
+    "status": "Draft - requires environment-owner review",
+    "approval_required_for_changes": true,
+    "synthetic": true,
+    "document_text": "# RUN-IAM-015: Missing Application Access\n\nCategory: Identity / Authorization\n\nPurpose: Resolve application access through entitlement, licensing, and approval checks.\n\nStatus: Draft synthetic material; review before operational use.\n\n## Symptoms\n- Users or monitoring report an issue consistent with missing application access.\n- The issue may affect one user, a group, or a shared service; determine scope before acting.\n\n## Prerequisites\n- Confirm requester/service identity and business impact using approved process.\n- Identify environment, owner, first-failure time, and relevant recent changes.\n- Use authorized diagnostic tools and least-privilege access.\n\n## Procedure\n1. Distinguish authentication failure from authorization failure.\n2. Check application assignment, license, group membership, role mapping, and provisioning state.\n3. Confirm the requested role is approved for the job function and data scope.\n4. Check recent governance or app configuration changes.\n5. Apply minimum approved entitlement through the source-of-truth access process.\n\n## Verification\n- Required function works and effective permissions match approval.\n- Access grant is auditable.\n\n## Rollback and recovery\n- Revert only an identified approved change using the documented change record.\n- If rollback is unsafe or the cause is uncertain, stop and contact the service owner.\n\n## Escalation\n- Unapproved privileged request, sensitive-data exposure risk, or broad provisioning failure.\n\n## Safety cautions\n- Do not grant administrator rights or bypass approval/separation-of-duties controls.\n\n## Related runbooks\n- RUN-IAM-004\n- RUN-STO-003\n\n## Evidence to record\n- Impact and scope\n- Start time and timezone\n- Sanitized errors and correlation IDs\n- Diagnostics and change IDs\n- Actions, approver, outcome, and follow-up owner"
+  },
+  {
+    "id": "RUN-CLD-009",
+    "title": "Kubernetes Pods Cannot Be Scheduled",
+    "category": "Cloud Platform",
+    "subcategory": "Kubernetes scheduling",
+    "purpose": "Diagnose pending pods using scheduler events and policy/capacity evidence.",
+    "symptoms": [
+      "Users or monitoring report an issue consistent with kubernetes pods cannot be scheduled.",
+      "The issue may affect one user, a group, or a shared service; determine scope before acting."
+    ],
+    "prerequisites": [
+      "Confirm requester/service identity and business impact using approved process.",
+      "Identify environment, owner, first-failure time, and relevant recent changes.",
+      "Use authorized diagnostic tools and least-privilege access."
+    ],
+    "steps": [
+      "Inspect pod events for the specific unsatisfied constraint.",
+      "Check allocatable capacity, requests, taints/tolerations, affinity, quota, and volume binding.",
+      "Compare workload spec with approved deployment configuration.",
+      "Check node pool/autoscaler, storage class, and admission policy health.",
+      "Correct evidenced constraints or restore eligible capacity only through approved change control."
+    ],
+    "verification": [
+      "Pods schedule and become Ready.",
+      "No unrelated workload is displaced or left pending."
+    ],
+    "rollback_recovery": [
+      "Revert only an identified approved change using the documented change record.",
+      "If rollback is unsafe or the cause is uncertain, stop and contact the service owner."
+    ],
+    "escalation": [
+      "Capacity exhaustion across teams, policy conflict, unbound stateful volume, or production outage."
+    ],
+    "cautions": [
+      "Do not remove security constraints broadly or delete persistent volumes."
+    ],
+    "related": [
+      "RUN-PLT-004",
+      "RUN-APP-009"
+    ],
+    "version": "1.0-synthetic",
+    "status": "Draft - requires environment-owner review",
+    "approval_required_for_changes": true,
+    "synthetic": true,
+    "document_text": "# RUN-CLD-009: Kubernetes Pods Cannot Be Scheduled\n\nCategory: Cloud Platform / Kubernetes scheduling\n\nPurpose: Diagnose pending pods using scheduler events and policy/capacity evidence.\n\nStatus: Draft synthetic material; review before operational use.\n\n## Symptoms\n- Users or monitoring report an issue consistent with kubernetes pods cannot be scheduled.\n- The issue may affect one user, a group, or a shared service; determine scope before acting.\n\n## Prerequisites\n- Confirm requester/service identity and business impact using approved process.\n- Identify environment, owner, first-failure time, and relevant recent changes.\n- Use authorized diagnostic tools and least-privilege access.\n\n## Procedure\n1. Inspect pod events for the specific unsatisfied constraint.\n2. Check allocatable capacity, requests, taints/tolerations, affinity, quota, and volume binding.\n3. Compare workload spec with approved deployment configuration.\n4. Check node pool/autoscaler, storage class, and admission policy health.\n5. Correct evidenced constraints or restore eligible capacity only through approved change control.\n\n## Verification\n- Pods schedule and become Ready.\n- No unrelated workload is displaced or left pending.\n\n## Rollback and recovery\n- Revert only an identified approved change using the documented change record.\n- If rollback is unsafe or the cause is uncertain, stop and contact the service owner.\n\n## Escalation\n- Capacity exhaustion across teams, policy conflict, unbound stateful volume, or production outage.\n\n## Safety cautions\n- Do not remove security constraints broadly or delete persistent volumes.\n\n## Related runbooks\n- RUN-PLT-004\n- RUN-APP-009\n\n## Evidence to record\n- Impact and scope\n- Start time and timezone\n- Sanitized errors and correlation IDs\n- Diagnostics and change IDs\n- Actions, approver, outcome, and follow-up owner"
+  },
+  {
+    "id": "RUN-SEC-009",
+    "title": "Suspected Password Spraying",
+    "category": "Security",
+    "subcategory": "Credential attack",
+    "purpose": "Triage repeated authentication failures across accounts with security-led containment.",
+    "symptoms": [
+      "Users or monitoring report an issue consistent with suspected password spraying.",
+      "The issue may affect one user, a group, or a shared service; determine scope before acting."
+    ],
+    "prerequisites": [
+      "Confirm requester/service identity and business impact using approved process.",
+      "Identify environment, owner, first-failure time, and relevant recent changes.",
+      "Use authorized diagnostic tools and least-privilege access."
+    ],
+    "steps": [
+      "Review identity detections for patterns across users, apps, locations, and timestamps.",
+      "Look for successful sign-ins after failures and assess account privilege and session activity.",
+      "Correlate source indicators with approved threat intelligence and network telemetry.",
+      "Notify security response; avoid independent broad blocking without authorization.",
+      "Security responders apply targeted controls under incident plan and monitor recurrence."
+    ],
+    "verification": [
+      "Indicators are contained and affected accounts reviewed.",
+      "Suspicious successful sessions are addressed."
+    ],
+    "rollback_recovery": [
+      "Revert only an identified approved change using the documented change record.",
+      "If rollback is unsafe or the cause is uncertain, stop and contact the service owner."
+    ],
+    "escalation": [
+      "Suspicious successful login, privileged target, data exposure, or persistent campaign."
+    ],
+    "cautions": [
+      "Do not weaken authentication or publish raw personal/account data outside approved channels."
+    ],
+    "related": [
+      "RUN-IAM-004",
+      "RUN-IAM-008",
+      "RUN-SEC-005"
+    ],
+    "version": "1.0-synthetic",
+    "status": "Draft - requires environment-owner review",
+    "approval_required_for_changes": true,
+    "synthetic": true,
+    "document_text": "# RUN-SEC-009: Suspected Password Spraying\n\nCategory: Security / Credential attack\n\nPurpose: Triage repeated authentication failures across accounts with security-led containment.\n\nStatus: Draft synthetic material; review before operational use.\n\n## Symptoms\n- Users or monitoring report an issue consistent with suspected password spraying.\n- The issue may affect one user, a group, or a shared service; determine scope before acting.\n\n## Prerequisites\n- Confirm requester/service identity and business impact using approved process.\n- Identify environment, owner, first-failure time, and relevant recent changes.\n- Use authorized diagnostic tools and least-privilege access.\n\n## Procedure\n1. Review identity detections for patterns across users, apps, locations, and timestamps.\n2. Look for successful sign-ins after failures and assess account privilege and session activity.\n3. Correlate source indicators with approved threat intelligence and network telemetry.\n4. Notify security response; avoid independent broad blocking without authorization.\n5. Security responders apply targeted controls under incident plan and monitor recurrence.\n\n## Verification\n- Indicators are contained and affected accounts reviewed.\n- Suspicious successful sessions are addressed.\n\n## Rollback and recovery\n- Revert only an identified approved change using the documented change record.\n- If rollback is unsafe or the cause is uncertain, stop and contact the service owner.\n\n## Escalation\n- Suspicious successful login, privileged target, data exposure, or persistent campaign.\n\n## Safety cautions\n- Do not weaken authentication or publish raw personal/account data outside approved channels.\n\n## Related runbooks\n- RUN-IAM-004\n- RUN-IAM-008\n- RUN-SEC-005\n\n## Evidence to record\n- Impact and scope\n- Start time and timezone\n- Sanitized errors and correlation IDs\n- Diagnostics and change IDs\n- Actions, approver, outcome, and follow-up owner"
+  },
+  {
+    "id": "RUN-MSG-006",
+    "title": "Shared Mailbox Access and Synchronization",
+    "category": "Messaging",
+    "subcategory": "Shared mailbox",
+    "purpose": "Resolve shared mailbox permission or synchronization issues.",
+    "symptoms": [
+      "Users or monitoring report an issue consistent with shared mailbox access and synchronization.",
+      "The issue may affect one user, a group, or a shared service; determine scope before acting."
+    ],
+    "prerequisites": [
+      "Confirm requester/service identity and business impact using approved process.",
+      "Identify environment, owner, first-failure time, and relevant recent changes.",
+      "Use authorized diagnostic tools and least-privilege access."
+    ],
+    "steps": [
+      "Check messaging service health and approved web-client access.",
+      "Verify Full Access, Send As, or Send on Behalf matches the approved request.",
+      "Check permission propagation and audit logs.",
+      "Separate server-side permission issues from client cache/automapping behavior.",
+      "Use approved client refresh/re-add procedure and test with a non-sensitive message."
+    ],
+    "verification": [
+      "Mailbox folders synchronize and only approved capabilities work.",
+      "Audit trail matches intended access."
+    ],
+    "rollback_recovery": [
+      "Revert only an identified approved change using the documented change record.",
+      "If rollback is unsafe or the cause is uncertain, stop and contact the service owner."
+    ],
+    "escalation": [
+      "Unauthorized mailbox access, sensitive exposure, or broad messaging outage."
+    ],
+    "cautions": [
+      "Do not grant Full Access when narrower permission suffices; do not test with confidential content."
+    ],
+    "related": [
+      "RUN-MSG-003",
+      "RUN-IAM-015"
+    ],
+    "version": "1.0-synthetic",
+    "status": "Draft - requires environment-owner review",
+    "approval_required_for_changes": true,
+    "synthetic": true,
+    "document_text": "# RUN-MSG-006: Shared Mailbox Access and Synchronization\n\nCategory: Messaging / Shared mailbox\n\nPurpose: Resolve shared mailbox permission or synchronization issues.\n\nStatus: Draft synthetic material; review before operational use.\n\n## Symptoms\n- Users or monitoring report an issue consistent with shared mailbox access and synchronization.\n- The issue may affect one user, a group, or a shared service; determine scope before acting.\n\n## Prerequisites\n- Confirm requester/service identity and business impact using approved process.\n- Identify environment, owner, first-failure time, and relevant recent changes.\n- Use authorized diagnostic tools and least-privilege access.\n\n## Procedure\n1. Check messaging service health and approved web-client access.\n2. Verify Full Access, Send As, or Send on Behalf matches the approved request.\n3. Check permission propagation and audit logs.\n4. Separate server-side permission issues from client cache/automapping behavior.\n5. Use approved client refresh/re-add procedure and test with a non-sensitive message.\n\n## Verification\n- Mailbox folders synchronize and only approved capabilities work.\n- Audit trail matches intended access.\n\n## Rollback and recovery\n- Revert only an identified approved change using the documented change record.\n- If rollback is unsafe or the cause is uncertain, stop and contact the service owner.\n\n## Escalation\n- Unauthorized mailbox access, sensitive exposure, or broad messaging outage.\n\n## Safety cautions\n- Do not grant Full Access when narrower permission suffices; do not test with confidential content.\n\n## Related runbooks\n- RUN-MSG-003\n- RUN-IAM-015\n\n## Evidence to record\n- Impact and scope\n- Start time and timezone\n- Sanitized errors and correlation IDs\n- Diagnostics and change IDs\n- Actions, approver, outcome, and follow-up owner"
+  },
+  {
+    "id": "RUN-APP-014",
+    "title": "Slow Business Application Responses",
+    "category": "Application",
+    "subcategory": "Latency",
+    "purpose": "Identify whether slowness originates in client, service, dependency, or capacity.",
+    "symptoms": [
+      "Users or monitoring report an issue consistent with slow business application responses.",
+      "The issue may affect one user, a group, or a shared service; determine scope before acting."
+    ],
+    "prerequisites": [
+      "Confirm requester/service identity and business impact using approved process.",
+      "Identify environment, owner, first-failure time, and relevant recent changes.",
+      "Use authorized diagnostic tools and least-privilege access."
+    ],
+    "steps": [
+      "Quantify latency against service objective and determine scope by workflow, region, and endpoint.",
+      "Compare frontend, application, database, network, and dependency telemetry for the same window.",
+      "Check releases, traffic, queue depth, and resource saturation.",
+      "Use traces/request IDs to locate slow segment while redacting secrets and personal data.",
+      "Apply only evidence-based approved mitigation and assign monitoring/follow-up owner."
+    ],
+    "verification": [
+      "Latency returns within objective and key transactions pass.",
+      "Mitigation does not overload downstream services."
+    ],
+    "rollback_recovery": [
+      "Revert only an identified approved change using the documented change record.",
+      "If rollback is unsafe or the cause is uncertain, stop and contact the service owner."
+    ],
+    "escalation": [
+      "Critical workflow breaches objective, dependency saturation threatens other services, or impact grows."
+    ],
+    "cautions": [
+      "Do not blindly increase timeouts/retries or cache sensitive data without review."
+    ],
+    "related": [
+      "RUN-APP-004",
+      "RUN-APP-009",
+      "RUN-DB-003"
+    ],
+    "version": "1.0-synthetic",
+    "status": "Draft - requires environment-owner review",
+    "approval_required_for_changes": true,
+    "synthetic": true,
+    "document_text": "# RUN-APP-014: Slow Business Application Responses\n\nCategory: Application / Latency\n\nPurpose: Identify whether slowness originates in client, service, dependency, or capacity.\n\nStatus: Draft synthetic material; review before operational use.\n\n## Symptoms\n- Users or monitoring report an issue consistent with slow business application responses.\n- The issue may affect one user, a group, or a shared service; determine scope before acting.\n\n## Prerequisites\n- Confirm requester/service identity and business impact using approved process.\n- Identify environment, owner, first-failure time, and relevant recent changes.\n- Use authorized diagnostic tools and least-privilege access.\n\n## Procedure\n1. Quantify latency against service objective and determine scope by workflow, region, and endpoint.\n2. Compare frontend, application, database, network, and dependency telemetry for the same window.\n3. Check releases, traffic, queue depth, and resource saturation.\n4. Use traces/request IDs to locate slow segment while redacting secrets and personal data.\n5. Apply only evidence-based approved mitigation and assign monitoring/follow-up owner.\n\n## Verification\n- Latency returns within objective and key transactions pass.\n- Mitigation does not overload downstream services.\n\n## Rollback and recovery\n- Revert only an identified approved change using the documented change record.\n- If rollback is unsafe or the cause is uncertain, stop and contact the service owner.\n\n## Escalation\n- Critical workflow breaches objective, dependency saturation threatens other services, or impact grows.\n\n## Safety cautions\n- Do not blindly increase timeouts/retries or cache sensitive data without review.\n\n## Related runbooks\n- RUN-APP-004\n- RUN-APP-009\n- RUN-DB-003\n\n## Evidence to record\n- Impact and scope\n- Start time and timezone\n- Sanitized errors and correlation IDs\n- Diagnostics and change IDs\n- Actions, approver, outcome, and follow-up owner"
+  },
+  {
+    "id": "RUN-DB-007",
+    "title": "Database Storage Capacity Alerts",
+    "category": "Database",
+    "subcategory": "Storage capacity",
+    "purpose": "Respond to storage pressure before writes fail or recovery risk rises.",
+    "symptoms": [
+      "Users or monitoring report an issue consistent with database storage capacity alerts.",
+      "The issue may affect one user, a group, or a shared service; determine scope before acting."
+    ],
+    "prerequisites": [
+      "Confirm requester/service identity and business impact using approved process.",
+      "Identify environment, owner, first-failure time, and relevant recent changes.",
+      "Use authorized diagnostic tools and least-privilege access."
+    ],
+    "steps": [
+      "Confirm utilization, growth rate, threshold, and time-to-exhaustion.",
+      "Identify growing category: data, transaction logs, temp space, indexes, or backup staging.",
+      "Correlate growth with workload, batch jobs, retention changes, and abnormal transactions.",
+      "Review approved capacity expansion options, quotas, and maintenance constraints.",
+      "Require database-owner approval for expansion or policy-compliant cleanup; monitor writes, replication, and backups."
+    ],
+    "verification": [
+      "Capacity returns below agreed threshold and writes succeed.",
+      "Backup, replication, and recovery posture remain healthy."
+    ],
+    "rollback_recovery": [
+      "Revert only an identified approved change using the documented change record.",
+      "If rollback is unsafe or the cause is uncertain, stop and contact the service owner."
+    ],
+    "escalation": [
+      "Near-term production exhaustion, blocked replication, or cleanup conflicts with retention/recovery rules."
+    ],
+    "cautions": [
+      "Never manually delete DB files/logs/backups or purge data without reviewed recovery plan."
+    ],
+    "related": [
+      "RUN-DB-003",
+      "RUN-BKP-006"
+    ],
+    "version": "1.0-synthetic",
+    "status": "Draft - requires environment-owner review",
+    "approval_required_for_changes": true,
+    "synthetic": true,
+    "document_text": "# RUN-DB-007: Database Storage Capacity Alerts\n\nCategory: Database / Storage capacity\n\nPurpose: Respond to storage pressure before writes fail or recovery risk rises.\n\nStatus: Draft synthetic material; review before operational use.\n\n## Symptoms\n- Users or monitoring report an issue consistent with database storage capacity alerts.\n- The issue may affect one user, a group, or a shared service; determine scope before acting.\n\n## Prerequisites\n- Confirm requester/service identity and business impact using approved process.\n- Identify environment, owner, first-failure time, and relevant recent changes.\n- Use authorized diagnostic tools and least-privilege access.\n\n## Procedure\n1. Confirm utilization, growth rate, threshold, and time-to-exhaustion.\n2. Identify growing category: data, transaction logs, temp space, indexes, or backup staging.\n3. Correlate growth with workload, batch jobs, retention changes, and abnormal transactions.\n4. Review approved capacity expansion options, quotas, and maintenance constraints.\n5. Require database-owner approval for expansion or policy-compliant cleanup; monitor writes, replication, and backups.\n\n## Verification\n- Capacity returns below agreed threshold and writes succeed.\n- Backup, replication, and recovery posture remain healthy.\n\n## Rollback and recovery\n- Revert only an identified approved change using the documented change record.\n- If rollback is unsafe or the cause is uncertain, stop and contact the service owner.\n\n## Escalation\n- Near-term production exhaustion, blocked replication, or cleanup conflicts with retention/recovery rules.\n\n## Safety cautions\n- Never manually delete DB files/logs/backups or purge data without reviewed recovery plan.\n\n## Related runbooks\n- RUN-DB-003\n- RUN-BKP-006\n\n## Evidence to record\n- Impact and scope\n- Start time and timezone\n- Sanitized errors and correlation IDs\n- Diagnostics and change IDs\n- Actions, approver, outcome, and follow-up owner"
+  }
+]
