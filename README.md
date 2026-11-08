@@ -62,7 +62,8 @@ The demonstration corpus is **synthetic**: 22 draft runbooks (66 child chunks) a
 **Status:** Functional individual-project prototype for educational and demonstration use. Operational changes require appropriate authorization and human review.
 ```
 
-##to run first -> pip install -r requirements.txt
-##YOU NEED TWO TERMINAL ONE FOR RUNNING FastAPI AND ANOTHER FOR Stramlit
-##TERMINAL 1 RUN IT FROM THE ROOT IT_incident_copilot_RAG_chatbot ->  python -m uvicorn app.api.main:app --reload     
-##TERMINAL 2 RUN IT FROM THE ROOT IT_incident_copilot_RAG_chatbot ->  python -m streamlit run app/frontend/streamlit_app.py
+## to run first -> pip install -r requirements.txt
+## YOU NEED TWO TERMINAL ONE FOR RUNNING FastAPI AND ANOTHER FOR Stramlit
+## TERMINAL 1 RUN IT FROM THE ROOT IT_incident_copilot_RAG_chatbot ->  python -m uvicorn app.api.main:app --reload     
+## TERMINAL 2 RUN IT FROM THE ROOT IT_incident_copilot_RAG_chatbot ->  python -m streamlit run app/frontend/streamlit_app.py
+## ALSO PASTE YOUR GEMINI_API_KEY IN .env file
