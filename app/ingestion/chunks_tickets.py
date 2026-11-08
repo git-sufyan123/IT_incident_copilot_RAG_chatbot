@@ -35,7 +35,7 @@ def chunk_ticket(ticket: dict) -> dict:
 
 
 if __name__ == "__main__":
-    df = pd.read_csv("data/raw/resolved_it_incidents_1000.csv")
+    df = pd.read_csv("data/resolved_it_incidents_1000.csv")
     chunks = [chunk_ticket(row) for row in df.to_dict("records")]
 
     print("Total tickets:", len(df))
