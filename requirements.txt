@@ -6,6 +6,6 @@ pydantic-settings
 python-dotenv
 pandas
 numpy
-rank-bm25
+streamlit
 pytest
 httpx
