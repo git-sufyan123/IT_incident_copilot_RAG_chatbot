@@ -60,3 +60,9 @@ The demonstration corpus is **synthetic**: 22 draft runbooks (66 child chunks) a
 - Gemini API access and quota are required; the application is not fully offline.
 
 **Status:** Functional individual-project prototype for educational and demonstration use. Operational changes require appropriate authorization and human review.
+```
+
+##to run first -> pip install -r requirements.txt
+##YOU NEED TWO TERMINAL ONE FOR RUNNING FastAPI AND ANOTHER FOR Stramlit
+##TERMINAL 1 RUN IT FROM THE ROOT IT_incident_copilot_RAG_chatbot ->  python -m uvicorn app.api.main:app --reload     
+##TERMINAL 2 RUN IT FROM THE ROOT IT_incident_copilot_RAG_chatbot ->  python -m streamlit run app/frontend/streamlit_app.py
