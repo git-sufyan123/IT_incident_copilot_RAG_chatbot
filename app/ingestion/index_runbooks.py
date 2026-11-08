@@ -51,7 +51,7 @@ def embed_chunks(texts):
 
 
 def main():
-    runbooks = load_runbooks("data/raw/runbooks.jsonl")
+    runbooks = load_runbooks("data/runbooks.jsonl")
 
     chunks = []
     for runbook in runbooks:
