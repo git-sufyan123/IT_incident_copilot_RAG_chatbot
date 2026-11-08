@@ -12,7 +12,7 @@ load_dotenv()
 
 chat_client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 
-RUNBOOK_PATH = "data/raw/runbooks.jsonl"
+RUNBOOK_PATH = "data/runbooks.jsonl"
 
 # Parent store: full structured runbooks
 runbooks = {
