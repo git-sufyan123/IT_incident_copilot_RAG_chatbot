@@ -1,0 +1,11 @@
+google-genai
+qdrant-client
+fastapi
+uvicorn[standard]
+pydantic-settings
+python-dotenv
+pandas
+numpy
+rank-bm25
+pytest
+httpx
