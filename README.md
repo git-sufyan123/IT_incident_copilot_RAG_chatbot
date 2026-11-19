@@ -63,6 +63,7 @@ The demonstration corpus is **synthetic**: 22 draft runbooks (66 child chunks) a
 ```
 
 ## to run first -> pip install -r requirements.txt
+## then run -> docker compose up -d
 ## YOU NEED TWO TERMINAL ONE FOR RUNNING FastAPI AND ANOTHER FOR Stramlit
 ## TERMINAL 1 RUN IT FROM THE ROOT IT_incident_copilot_RAG_chatbot ->  python -m uvicorn app.api.main:app --reload     
 ## TERMINAL 2 RUN IT FROM THE ROOT IT_incident_copilot_RAG_chatbot ->  python -m streamlit run app/frontend/streamlit_app.py
