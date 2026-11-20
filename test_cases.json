@@ -1,0 +1,142 @@
+[
+  {
+    "id": "EVAL-001",
+    "query": "Multiple employees can reach the internet but internal application names return NXDOMAIN from the corporate DNS resolver.",
+    "expected_runbook": "RUN-NET-007",
+    "category": "DNS",
+    "reference_answer": "The primary relevant draft runbook is RUN-NET-007. Diagnose the reported dns incident using authorized read-only checks first; verify the cause before remediation, and treat synthetic draft guidance and historical tickets as unapproved evidence."
+  },
+  {
+    "id": "EVAL-002",
+    "query": "Remote staff enter correct credentials but the VPN client rejects sign-in during authentication; the tunnel never establishes.",
+    "expected_runbook": "RUN-NET-003",
+    "category": "VPN",
+    "reference_answer": "The primary relevant draft runbook is RUN-NET-003. Diagnose the reported vpn incident using authorized read-only checks first; verify the cause before remediation, and treat synthetic draft guidance and historical tickets as unapproved evidence."
+  },
+  {
+    "id": "EVAL-003",
+    "query": "A service responds from one office network but connections from another subnet time out on the required TCP port; DNS resolves normally.",
+    "expected_runbook": "RUN-NET-011",
+    "category": "Connectivity",
+    "reference_answer": "The primary relevant draft runbook is RUN-NET-011. Diagnose the reported connectivity incident using authorized read-only checks first; verify the cause before remediation, and treat synthetic draft guidance and historical tickets as unapproved evidence."
+  },
+  {
+    "id": "EVAL-004",
+    "query": "An employee account becomes locked repeatedly within minutes of being unlocked, even though the employee is not trying to sign in.",
+    "expected_runbook": "RUN-IAM-004",
+    "category": "Identity",
+    "reference_answer": "The primary relevant draft runbook is RUN-IAM-004. Diagnose the reported identity incident using authorized read-only checks first; verify the cause before remediation, and treat synthetic draft guidance and historical tickets as unapproved evidence."
+  },
+  {
+    "id": "EVAL-005",
+    "query": "Staff receive repeated MFA approval requests they did not initiate and cannot complete their normal sign-in flow.",
+    "expected_runbook": "RUN-IAM-008",
+    "category": "Identity",
+    "reference_answer": "The primary relevant draft runbook is RUN-IAM-008. Diagnose the reported identity incident using authorized read-only checks first; verify the cause before remediation, and treat synthetic draft guidance and historical tickets as unapproved evidence."
+  },
+  {
+    "id": "EVAL-006",
+    "query": "A laptop is extremely slow, its fan runs continuously, and task manager shows sustained CPU usage near 100 percent.",
+    "expected_runbook": "RUN-END-005",
+    "category": "Endpoint",
+    "reference_answer": "The primary relevant draft runbook is RUN-END-005. Diagnose the reported endpoint incident using authorized read-only checks first; verify the cause before remediation, and treat synthetic draft guidance and historical tickets as unapproved evidence."
+  },
+  {
+    "id": "EVAL-007",
+    "query": "After connecting a USB-C docking station, the laptop charges but the external display is not detected.",
+    "expected_runbook": "RUN-END-014",
+    "category": "Endpoint",
+    "reference_answer": "The primary relevant draft runbook is RUN-END-014. Diagnose the reported endpoint incident using authorized read-only checks first; verify the cause before remediation, and treat synthetic draft guidance and historical tickets as unapproved evidence."
+  },
+  {
+    "id": "EVAL-008",
+    "query": "Outlook repeatedly opens a credential prompt even after a user signs in successfully, while other applications authenticate normally.",
+    "expected_runbook": "RUN-MSG-003",
+    "category": "Messaging",
+    "reference_answer": "The primary relevant draft runbook is RUN-MSG-003. Diagnose the reported messaging incident using authorized read-only checks first; verify the cause before remediation, and treat synthetic draft guidance and historical tickets as unapproved evidence."
+  },
+  {
+    "id": "EVAL-009",
+    "query": "An internal web application returns HTTP 500 errors after a release, while its landing page remains reachable.",
+    "expected_runbook": "RUN-APP-004",
+    "category": "Application",
+    "reference_answer": "The primary relevant draft runbook is RUN-APP-004. Diagnose the reported application incident using authorized read-only checks first; verify the cause before remediation, and treat synthetic draft guidance and historical tickets as unapproved evidence."
+  },
+  {
+    "id": "EVAL-010",
+    "query": "Users intermittently see HTTP 502 Bad Gateway and 503 Service Unavailable responses at the reverse proxy.",
+    "expected_runbook": "RUN-APP-009",
+    "category": "Application",
+    "reference_answer": "The primary relevant draft runbook is RUN-APP-009. Diagnose the reported application incident using authorized read-only checks first; verify the cause before remediation, and treat synthetic draft guidance and historical tickets as unapproved evidence."
+  },
+  {
+    "id": "EVAL-011",
+    "query": "A business service logs database connection timeouts and its connection pool is exhausted during peak usage.",
+    "expected_runbook": "RUN-DB-003",
+    "category": "Database",
+    "reference_answer": "The primary relevant draft runbook is RUN-DB-003. Diagnose the reported database incident using authorized read-only checks first; verify the cause before remediation, and treat synthetic draft guidance and historical tickets as unapproved evidence."
+  },
+  {
+    "id": "EVAL-012",
+    "query": "Several employees report an unexpected email asking them to open a link and provide their corporate credentials.",
+    "expected_runbook": "RUN-SEC-005",
+    "category": "Security",
+    "reference_answer": "The primary relevant draft runbook is RUN-SEC-005. Diagnose the reported security incident using authorized read-only checks first; verify the cause before remediation, and treat synthetic draft guidance and historical tickets as unapproved evidence."
+  },
+  {
+    "id": "EVAL-013",
+    "query": "A containerized service keeps restarting and monitoring shows it is hitting its memory limit.",
+    "expected_runbook": "RUN-PLT-004",
+    "category": "Platform",
+    "reference_answer": "The primary relevant draft runbook is RUN-PLT-004. Diagnose the reported platform incident using authorized read-only checks first; verify the cause before remediation, and treat synthetic draft guidance and historical tickets as unapproved evidence."
+  },
+  {
+    "id": "EVAL-014",
+    "query": "The nightly backup did not finish within its usual window and several backup jobs report failures.",
+    "expected_runbook": "RUN-BKP-006",
+    "category": "Backup",
+    "reference_answer": "The primary relevant draft runbook is RUN-BKP-006. Diagnose the reported backup incident using authorized read-only checks first; verify the cause before remediation, and treat synthetic draft guidance and historical tickets as unapproved evidence."
+  },
+  {
+    "id": "EVAL-015",
+    "query": "Employees cannot open a shared network folder; some receive access denied while others see the share as unavailable.",
+    "expected_runbook": "RUN-STO-003",
+    "category": "Storage",
+    "reference_answer": "The primary relevant draft runbook is RUN-STO-003. Diagnose the reported storage incident using authorized read-only checks first; verify the cause before remediation, and treat synthetic draft guidance and historical tickets as unapproved evidence."
+  },
+  {
+    "id": "EVAL-016",
+    "query": "Office printers show offline and print jobs remain stuck in the queue even though users can send documents.",
+    "expected_runbook": "RUN-WKS-002",
+    "category": "Workplace",
+    "reference_answer": "The primary relevant draft runbook is RUN-WKS-002. Diagnose the reported workplace incident using authorized read-only checks first; verify the cause before remediation, and treat synthetic draft guidance and historical tickets as unapproved evidence."
+  },
+  {
+    "id": "EVAL-017",
+    "query": "A new employee can sign in to the company portal but cannot see the finance application they were approved to use.",
+    "expected_runbook": "RUN-IAM-015",
+    "category": "Identity",
+    "reference_answer": "The primary relevant draft runbook is RUN-IAM-015. Diagnose the reported identity incident using authorized read-only checks first; verify the cause before remediation, and treat synthetic draft guidance and historical tickets as unapproved evidence."
+  },
+  {
+    "id": "EVAL-018",
+    "query": "New Kubernetes workloads remain Pending and scheduler events indicate insufficient cluster resources or placement constraints.",
+    "expected_runbook": "RUN-CLD-009",
+    "category": "Cloud",
+    "reference_answer": "The primary relevant draft runbook is RUN-CLD-009. Diagnose the reported cloud incident using authorized read-only checks first; verify the cause before remediation, and treat synthetic draft guidance and historical tickets as unapproved evidence."
+  },
+  {
+    "id": "EVAL-019",
+    "query": "Security monitoring reports hundreds of failed sign-ins against many distinct user accounts from a small set of source IPs.",
+    "expected_runbook": "RUN-SEC-009",
+    "category": "Security",
+    "reference_answer": "The primary relevant draft runbook is RUN-SEC-009. Diagnose the reported security incident using authorized read-only checks first; verify the cause before remediation, and treat synthetic draft guidance and historical tickets as unapproved evidence."
+  },
+  {
+    "id": "EVAL-020",
+    "query": "A delegated shared mailbox is missing folders and recent messages for several authorized Outlook users, though their personal mailboxes work.",
+    "expected_runbook": "RUN-MSG-006",
+    "category": "Messaging",
+    "reference_answer": "The primary relevant draft runbook is RUN-MSG-006. Diagnose the reported messaging incident using authorized read-only checks first; verify the cause before remediation, and treat synthetic draft guidance and historical tickets as unapproved evidence."
+  }
+]
